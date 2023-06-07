@@ -1,0 +1,101 @@
+﻿@using OnlineTicariOtomasyon.Models.Siniflar
+@model List<Faturalar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<table id="tbl1" class="table table-bordered" style="margin-top:20px">
+    <thead>
+        <tr>
+
+            <th>Seri No</th>
+
+           
+            <th>Tarih</th>
+            <th>Saat</th>
+           
+            <th>Toplam</th>
+            <th>Güncelle</th>
+            <th>Detaylar</th>
+          
+            <th>Yeni Kalem</th>
+
+        </tr>
+    </thead>
+
+    @foreach (var k in Model)
+    {
+
+        <tr>
+
+            <td>
+                @k.FaturaSeriNo @k.FaturaSıraNo
+            </td>
+
+
+            <td>
+                @k.Tarih
+            </td>
+            <td>
+                @k.Saat
+            </td>
+
+    
+            <td>
+                @k.Toplam₺
+            </td>
+
+            <td><a href="/Faturalar/FaturaGetir/@k.Faturaid" class="btn  btn-warning ">Güncelle</a></td>
+            <td><a href="/Faturalar/FaturaDetay/@k.Faturaid" class="btn  btn-default " style="background-color:midnightblue;color:white">Fatura Detay</a></td>
+        
+            <td><a href="/Faturalar/FaturaDetay/@k.Faturaid" class="btn  btn-default " style="background-color:aquamarine;color:black">Kalem</a></td>
+
+        </tr>
+    }
+</table>
+<br />
+<a href="/Faturalar/FaturaEkle" class="btn btn-info">Yeni Fatura Giriş</a>
+<br />
+<br />
+<button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#Modal1" >Popup Penceresi</button>
+<div class="modal" id="Modal1" >
+    <div class="modal-dialog" >
+        <div class="modal-content" >
+            <div class="modal-header"  >
+                <h2 class="modal-title">
+                    Popup Deneme
+                </h2>
+            </div>
+            <div class="modal-body" >
+                <table  class="table table-bordered" >
+                    <tr>
+                        <td>Seri No</td>
+                        <td>Sıra No</td>
+                        <td>Tutar</td>
+                    </tr>
+                    @foreach (var x in Model)
+                    {
+
+
+                    <tr>
+                        <td>
+                            @x.FaturaSeriNo
+                        </td>
+                        <td>
+                            @x.FaturaSıraNo
+                        </td>
+                        <td>
+                            @x.Toplam
+                        </td>
+                    </tr>
+                    }
+                </table>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" >Vazgeç</button>
+            </div>
+        </div>
+    </div>
+</div>
+
